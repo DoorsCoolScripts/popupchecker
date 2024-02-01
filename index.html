@@ -1,26 +1,5 @@
 
 <script>
- // write a simple wrapper around window.open that allows legal close
-const openWindow = () => {
-  const wind =  window.open('','_blank','');
-  
-  // save the old close function
-  const actualClose = wind.close;
-  
-  // Override wind.close and setup a promise that is resolved on wind.close
-  const closePromise = new Promise(r=>{wind.close = ()=>{r(undefined);}});
-
-  // Setup an async function
-  // that closes the window after resolution of the above promise
-  (async ()=>{
-    await closePromise; // wait for promise resolution
-    actualClose(); // closing the window here is legal
-  })();
-
-  return wind;
-}
-
-
-// call wind.close anywhere
-document.getElementById('myButton').addEventListener('click', wind.close)
+var customWindow = window.open('', '_blank', '');
+    customWindow.close();
 </script>
